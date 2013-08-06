@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
 
 	for(i = 0; i < found_words->length; i++) {
 		printf("%s (%d), ", found_words->word_list[i]->word, 
-							found_words->word_list[i]->score);
+				found_words->word_list[i]->score);
 	} printf("\n");
 
 	delete_word_list(found_words);
