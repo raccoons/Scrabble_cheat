@@ -17,12 +17,12 @@ Word_array *create_word_list()
 	Word_array *WA = malloc(sizeof(Word_array));
 	WA->max = 10;
 	WA->length = 0;
-	WA->word_list = malloc(sizeof(Word) * WA->max);
+	WA->word_list = malloc(sizeof(Word *) * WA->max);
 
 	return WA;
 }
 
-void Word_array_push(Word_array *WA, char *word)
+void word_array_push(Word_array *WA, char *word)
 {
 	Word *W = new_word(word);
 
@@ -31,8 +31,7 @@ void Word_array_push(Word_array *WA, char *word)
 		WA->word_list = realloc(WA->word_list, sizeof(Word *) * WA->max);
 	}
 
-	WA->word_list[WA->length] = W;
-	WA->length++;
+	WA->word_list[WA->length++] = W;
 }
 
 void delete_word_list(Word_array *WA)
@@ -117,11 +116,13 @@ int main(int argc, char *argv[])
 			}
 		}
 		if(found) {
-			Word_array_push(found_words, word);
+			word_array_push(found_words, word);
 		} 
 		/* Reset the tile map from the copy made at the start */
 		memcpy(tile_map, tile_map_copy, sizeof(char) * ALPHABET_LENGTH); 
 	} 
+
+	fclose(fp);
 	
 	qsort(found_words->word_list, found_words->length,
 		sizeof(Word *), (word_compare)compare_scores);
@@ -129,10 +130,10 @@ int main(int argc, char *argv[])
 	for(i = 0; i < found_words->length; i++) {
 		printf("%s (%d), ", found_words->word_list[i]->word, 
 				found_words->word_list[i]->score);
-	} printf("\n");
+	} 
+	printf("\n");
 
 	delete_word_list(found_words);
-	fclose(fp);
 
 	return EXIT_SUCCESS;
 }

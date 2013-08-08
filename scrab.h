@@ -18,12 +18,11 @@ typedef struct {
 typedef int (*word_compare)(const void *a, const void *b);
 
 Word_array *create_word_list();
-void Word_array_push(Word_array *WA, char *word);
+void word_array_push(Word_array *WA, char *word);
 void delete_word_list(Word_array *WA);
 Word *new_word(char *word);
 void add_to_map(char *tiles, char *tile_map);
 int get_word_score(char *word);
 int compare_scores(Word **a, Word **b);
-int check_input(char *input);
 
 #endif
