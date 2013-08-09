@@ -62,7 +62,6 @@ void add_to_map(char *tiles, char *tile_map)
 
 	for(i = 0; i < strlen(tiles); i++) {
 		c = toupper(tiles[i]);
-		tiles[i] = toupper(tiles[i]);
 		tile_map[c-'A'] += 1;
 	}
 }
@@ -107,7 +106,7 @@ int main(int argc, char *argv[])
 
 	while(fscanf(fp, "%s\n", word) != EOF) {
 		for(i = 0; i < strlen(word); i++) {
-			if(strchr(tiles, word[i]) && tile_map[word[i]-'A'] > 0) {
+			if(tile_map[word[i]-'A'] > 0) {
 				tile_map[word[i]-'A'] -= 1;
 				found = true;
 			} else {
